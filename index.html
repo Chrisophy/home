@@ -237,6 +237,21 @@
     </div>
   </div>
 
+  <div id="modal-trailer" class="fixed inset-0 bg-black z-[70] flex flex-col items-center justify-center hidden">
+    <div class="absolute top-4 right-4 z-80 flex items-center gap-3">
+      <span id="trailer-title" class="text-xs sm:text-sm font-bold text-cyan-300 hidden sm:inline"></span>
+      <button onclick="closeTrailerModal()" class="text-white bg-brand-black/80 hover:bg-red-600 px-4 py-2 rounded-full border border-cyan-500/50 text-sm font-bold flex items-center gap-2 transition-all">
+        <i class="fa-solid fa-xmark text-lg"></i> Schließen
+      </button>
+    </div>
+    <div class="w-full h-full flex items-center justify-center p-0 sm:p-4">
+      <video id="trailer-video-player" controls autoplay playsinline class="w-full h-full max-h-screen object-contain">
+        <source id="trailer-video-source" src="" type="video/mp4">
+        Ihr Browser unterstützt das Video-Tag nicht.
+      </video>
+    </div>
+  </div>
+
   <div id="modal-lightbox" class="fixed inset-0 bg-black/95 backdrop-blur-lg z-[60] flex items-center justify-center p-3 hidden" onclick="closeLightbox()">
     <button onclick="closeLightbox()" class="absolute right-4 top-4 text-slate-300 hover:text-white bg-brand-black/80 p-2.5 rounded-full border border-cyan-500/50 z-70">
       <i class="fa-solid fa-xmark text-lg"></i>
@@ -290,6 +305,7 @@
         kodiUrl: '',
         apkUrl: 'https://www.dropbox.com/scl/fi/6bdqi9ayikjtqpsrwrhsp/DeezerVisual.4.0.apk?rlkey=7ho5lkjt97s9v4dofw8zaqpjn&st=cqwcy8s1&dl=1',
         htmlUrl: '',
+        trailerUrl: 'https://www.dropbox.com/scl/fi/92utqt3eay1w8xgkzn8kt/4_5989842746272128578.mp4?rlkey=p7p99kaect7362l2u8vgjdf53&st=cvsv89am&raw=1',
         tags: ['Musik', 'App']
       },
       {
@@ -307,6 +323,7 @@
         kodiUrl: '',
         apkUrl: '',
         htmlUrl: 'https://chrisophy.github.io/KSG/buildbauer.html',
+        trailerUrl: '',
         tags: ['Kodi', 'Build', 'Wizard', 'Anleitung', 'Addon']
       },    
       {
@@ -324,6 +341,7 @@
         kodiUrl: '',
         apkUrl: '',
         htmlUrl: 'https://mr-evil1.github.io/kodi-media-repo/',
+        trailerUrl: '',
         tags: ['Kodi', 'Repo', 'Repository']
       },    
       {
@@ -340,6 +358,7 @@
         kodiUrl: 'https://raw.githubusercontent.com/mr-evil1/kodi-media-repo/refs/heads/main/plugin.video.gezkino/plugin.video.gezkino-2026.10.19.zip',
         apkUrl: 'https://github.com/Chrisophy/GEZ-KiNO/releases/download/GEZv/GEZ.KiNO.apk',
         htmlUrl: 'https://chrisophy.github.io/GEZ-KiNO/',
+        trailerUrl: '',
         tags: ['Kodi', 'video']
       },
       {
@@ -354,6 +373,7 @@
         kodiUrl: '',
         apkUrl: 'https://github.com/Chrisophy/Stimmung/releases/download/002/Tagebuch.apk',
         htmlUrl: 'https://chrisophy.github.io/Stimmung',
+        trailerUrl: '',
         tags: ['Stimmung', 'App', 'Tagebuch']
       },
       {
@@ -368,6 +388,7 @@
         kodiUrl: '',
         apkUrl: '',
         htmlUrl: 'https://chrisophy.github.io/KSG/',
+        trailerUrl: '',
         tags: ['Kodi', 'Skin', 'Addon', 'Design']
       },
       {
@@ -382,6 +403,7 @@
         kodiUrl: '',
         apkUrl: 'https://github.com/Chrisophy/Wetter/raw/refs/heads/main/Wetter.apk',
         htmlUrl: 'https://chrisophy.github.io/Wetter/',
+        trailerUrl: '',
         tags: ['Wetter', 'App']
       },
       {
@@ -396,6 +418,7 @@
         kodiUrl: 'https://github.com/Chrisophy/ShutTheBox/raw/refs/heads/main/game.shut.zip',
         apkUrl: 'https://github.com/Chrisophy/ShutTheBox/raw/refs/heads/main/ShutTheBox.apk',
         htmlUrl: 'https://chrisophy.github.io/ShutTheBox/',
+        trailerUrl: '',
         tags: ['Spiel', 'Klappbrett', 'ShutTheBox']
       },
       {
@@ -410,6 +433,7 @@
         kodiUrl: '',
         apkUrl: 'https://www.dropbox.com/scl/fi/flqxx37n848j51yonooso/MovieScout.apk?rlkey=0zcjslenfmhzvr7oq4imdkqaq&st=ifwk4c93&dl=1',
         htmlUrl: '',
+        trailerUrl: '',
         tags: ['Kodi', 'Launcher', 'App', 'Filme', 'Serien', 'Live-TV'],
         extraLinks: [
           { label: 'Legale Scraper', url: 'https://github.com/Chrisophy/scraper', icon: 'fa-code' },
@@ -557,6 +581,7 @@
             kodiUrl: zipUrl,
             apkUrl: '',
             htmlUrl: '',
+            trailerUrl: '',
             tags: ['Kodi', id.split('.')[1] || 'Addon']
           });
         } catch (e) {
@@ -740,6 +765,7 @@
                     <span><i class="fa-solid fa-download text-emerald-400 mr-1"></i><strong class="text-white">${topItem.downloads}</strong> DLs</span>
                   </div>
                   <div class="flex flex-wrap items-center gap-1.5">
+                    ${topItem.trailerUrl ? `<button onclick="openTrailerModal('${topItem.trailerUrl}', '${topItem.title}')" class="glossy-button px-2.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-bold rounded-lg flex items-center gap-1"><i class="fa-solid fa-play"></i> Trailer</button>` : ''}
                     ${topItem.kodiUrl ? `<button onclick="triggerDownload('${topItem.id}', '${topItem.kodiUrl}', 'Kodi ZIP')" class="glossy-button px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold rounded-lg flex items-center gap-1"><i class="fa-solid fa-cube"></i> Kodi</button>` : ''}
                     ${topItem.apkUrl ? `<button onclick="triggerDownload('${topItem.id}', '${topItem.apkUrl}', 'Android APK')" class="glossy-button px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold rounded-lg flex items-center gap-1"><i class="fa-brands fa-android"></i> APK</button>` : ''}
                     ${topItem.htmlUrl ? `<a href="${topItem.htmlUrl}" target="_blank" onclick="trackClick('${topItem.id}')" class="glossy-button px-2.5 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold rounded-lg flex items-center gap-1"><i class="fa-solid fa-globe"></i> Web</a>` : ''}
@@ -773,6 +799,7 @@
               </div>
               <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent opacity-90 pointer-events-none"></div>
               <div class="absolute bottom-1.5 left-2.5 flex gap-1 z-10">
+                ${item.trailerUrl ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-purple-950/90 text-purple-300 border border-purple-500/30"><i class="fa-solid fa-film mr-0.5"></i> Trailer</span>' : ''}
                 ${item.kodiUrl ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-950/90 text-blue-300 border border-blue-500/30">Kodi</span>' : ''}
                 ${item.apkUrl ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-950/90 text-emerald-300 border border-emerald-500/30">APK</span>' : ''}
                 ${item.htmlUrl || (item.extraLinks && item.extraLinks.length > 0) ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-500/30">Web</span>' : ''}
@@ -809,6 +836,7 @@
               <div class="pt-3 mt-3 border-t border-cyan-500/15 flex items-center justify-between gap-1">
                 <span class="text-[10px] text-slate-400"><i class="fa-solid fa-download text-emerald-400 mr-1"></i>${item.downloads}</span>
                 <div class="flex items-center space-x-1">
+                  ${item.trailerUrl ? `<button onclick="openTrailerModal('${item.trailerUrl}', '${item.title}')" title="Trailer abspielen" class="glossy-button p-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs"><i class="fa-solid fa-play"></i></button>` : ''}
                   ${item.kodiUrl ? `<button onclick="triggerDownload('${item.id}', '${item.kodiUrl}', 'Kodi ZIP')" title="Kodi Addon" class="glossy-button p-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs"><i class="fa-solid fa-cube"></i></button>` : ''}
                   ${item.apkUrl ? `<button onclick="triggerDownload('${item.id}', '${item.apkUrl}', 'Android APK')" title="Android APK" class="glossy-button p-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs"><i class="fa-brands fa-android"></i></button>` : ''}
                   ${item.htmlUrl ? `<a href="${item.htmlUrl}" target="_blank" onclick="trackClick('${item.id}')" title="Web Version" class="glossy-button p-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-xs"><i class="fa-solid fa-globe"></i></a>` : ''}
@@ -885,6 +913,23 @@
 
     function closeLightbox() {
       document.getElementById('modal-lightbox').classList.add('hidden');
+    }
+
+    function openTrailerModal(url, title) {
+      const player = document.getElementById('trailer-video-player');
+      const source = document.getElementById('trailer-video-source');
+      document.getElementById('trailer-title').innerHTML = `<i class="fa-solid fa-film text-purple-400"></i> Trailer: ${title}`;
+      source.src = url;
+      player.load();
+      document.getElementById('modal-trailer').classList.remove('hidden');
+      player.play().catch(e => console.log('Autoplay blockiert:', e));
+    }
+
+    function closeTrailerModal() {
+      const player = document.getElementById('trailer-video-player');
+      player.pause();
+      document.getElementById('trailer-video-source').src = '';
+      document.getElementById('modal-trailer').classList.add('hidden');
     }
 
     function incrementDownload(id) {
@@ -971,7 +1016,7 @@
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-cyan-500/20 pb-2.5">
             <div>
               <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">Entwickler: ${item.developer || 'IT(\'s) Possible'}</span>
-            <h2 class="text-base sm:text-lg font-bold text-white mt-1">${item.title}</h2>
+              <h2 class="text-base sm:text-lg font-bold text-white mt-1">${item.title}</h2>
             </div>
             <div class="text-right text-[11px] text-slate-400">
               <div>Version: <strong class="text-white">${item.version || 'v1.0'}</strong></div>
@@ -987,6 +1032,7 @@
           <div class="pt-2">
             <span class="text-[10px] text-slate-400 uppercase tracking-wider block mb-2">Verfügbare Mirrors & Plattformen:</span>
             <div class="flex flex-wrap gap-2">
+              ${item.trailerUrl ? `<button onclick="openTrailerModal('${item.trailerUrl}', '${item.title}')" class="glossy-button px-3 py-2 bg-purple-600 text-white text-xs font-bold rounded-lg flex items-center gap-1.5"><i class="fa-solid fa-play"></i> Trailer abspielen</button>` : ''}
               ${item.kodiUrl ? `<button onclick="triggerDownload('${item.id}', '${item.kodiUrl}', 'Kodi ZIP')" class="glossy-button px-3 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg flex items-center gap-1.5"><i class="fa-solid fa-cube"></i> Kodi Addon</button>` : ''}
               ${item.apkUrl ? `<button onclick="triggerDownload('${item.id}', '${item.apkUrl}', 'Android APK')" class="glossy-button px-3 py-2 bg-emerald-600 text-white text-xs font-bold rounded-lg flex items-center gap-1.5"><i class="fa-brands fa-android"></i> Android APK</button>` : ''}
               ${item.htmlUrl ? `<a href="${item.htmlUrl}" target="_blank" onclick="trackClick('${item.id}')" class="glossy-button px-3 py-2 bg-cyan-600 text-white text-xs font-bold rounded-lg flex items-center gap-1.5"><i class="fa-solid fa-globe"></i> HTML Web-Link</a>` : ''}
