@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT('s) Possible // Team Releases & Showcase</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Orbitron', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              black: '#030712',
+              dark: '#070d1e',
+              card: '#0b1329',
+              gloss: '#121e3d',
+              border: '#1e3a8a',
+              cyan: '#00f0ff',
+              blue: '#0066ff',
+              neon: '#38bdf8',
+              royal: '#1d4ed8',
+              deep: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #030712;
+      background-image: 
+        radial-gradient(circle at 20% 15%, rgba(0, 240, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 80% 60%, rgba(0, 102, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(29, 78, 216, 0.1) 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    .glossy-reflection {
+      position: relative;
+      overflow: hidden;
+    }
+    .glossy-reflection::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 45%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.02) 80%, rgba(255, 255, 255, 0) 100%);
+      border-radius: inherit; pointer-events: none; z-index: 10;
+    }
+
+    .glossy-button {
+      position: relative; overflow: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glossy-button::after {
+      content: ''; position: absolute; top: -50%; left: -60%; width: 50%; height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transform: rotate(25deg); transition: all 0.6s ease;
+    }
+    .glossy-button:hover::after { left: 130%; }
+
+    .neon-card {
+      background: rgba(11, 19, 41, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+    .neon-card:hover {
+      border-color: rgba(0, 240, 255, 0.5);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .text-glossy-cyan {
+      background: linear-gradient(180deg, #ffffff 0%, #a5f3fc 45%, #00f0ff 70%, #0066ff 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+
+    .bg-grid-pattern {
+      background-size: 30px 30px;
+      background-image: 
+        linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 4px; }
+    ::-webkit-scrollbar-track { background: #030712; }
+    ::-webkit-scrollbar-thumb { background: #1e3a8a; border-radius: 3px; border: 1px solid #00f0ff; }
+    ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-black">
+
+  <div class="fixed inset-0 bg-grid-pattern pointer-events-none z-0"></div>
+
+  <div class="relative z-10 flex-col flex min-h-screen">
+
+    <header class="border-b border-cyan-500/30 bg-brand-dark/95 backdrop-blur-md sticky top-0 z-40 shadow-lg w-full">
+      <div class="w-full px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
+        
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 via-blue-600 to-indigo-900 p-0.5 shadow-[0_0_15px_rgba(0,240,255,0.6)] glossy-reflection flex-shrink-0">
+            <div class="w-full h-full bg-brand-black rounded-[10px] flex items-center justify-center">
+              <i class="fa-solid fa-layer-group text-base text-cyan-400 animate-pulse"></i>
+            </div>
+          </div>
+          <div>
+            <h1 class="font-display font-black text-sm sm:text-lg tracking-wider text-glossy-cyan uppercase flex items-center gap-2">
+              IT('s) <span class="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">Possible</span>
+              <span class="text-[9px] font-sans px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-400/45">SHOWCASE</span>
+            </h1>
+            <p class="text-[11px] text-cyan-300 font-medium tracking-wide flex items-center gap-1.5">
+              <i class="fa-solid fa-code-merge text-[10px] text-amber-400"></i> Curated by mr-evil1 & zusatzmetall
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3 sm:space-x-4 text-xs bg-brand-black/80 px-4 py-2 rounded-xl border border-cyan-500/30 shadow-[0_0_10px_rgba(0,240,255,0.15)] flex-shrink-0">
+          <div class="flex items-center space-x-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="hidden sm:inline text-slate-400">Status:</span>
+            <span id="repo-status" class="text-cyan-400 font-bold">Lade Repo...</span>
+          </div>
+          <div class="h-3.5 w-px bg-slate-800"></div>
+          <div>
+            <span class="hidden sm:inline text-slate-400">Einträge:</span>
+            <span id="stat-count" class="text-cyan-400 font-bold">0</span>
+          </div>
+          <div class="h-3.5 w-px bg-slate-800"></div>
+          <div>
+            <span class="hidden sm:inline text-slate-400">Downloads:</span>
+            <span id="stat-downloads" class="text-cyan-300 font-bold">0</span>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <section class="relative w-full px-4 sm:px-8 pt-4 pb-2">
+      <div class="w-full flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 bg-brand-dark/90 p-3 rounded-xl border border-cyan-500/20 glossy-reflection mb-3 shadow-lg">
+        
+        <div class="relative flex-1">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-cyan-400 text-xs"></i>
+          <input type="text" id="search-input" oninput="handleSearch()" placeholder="Suche nach Addons, Apps, Tools..." class="w-full bg-brand-black/90 border border-cyan-500/30 rounded-lg pl-10 pr-8 py-2 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 shadow-inner" />
+          <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-cyan-400 text-xs">
+            <i class="fa-solid fa-circle-xmark"></i>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between lg:justify-end gap-3">
+          <div class="flex items-center space-x-2">
+            <span class="text-[11px] font-medium text-slate-400 whitespace-nowrap"><i class="fa-solid fa-sort mr-1 text-cyan-400"></i>Sort:</span>
+            <select id="sort-select" onchange="renderToplist()" class="bg-brand-black border border-cyan-500/30 text-xs text-cyan-300 font-semibold rounded-lg px-3 py-2 focus:outline-none">
+              <option value="stars">⭐ Meine Sterne</option>
+              <option value="default">📌 Standard</option>
+              <option value="newest">⚡ Neueste</option>
+              <option value="downloads">📥 Downloads</option>
+              <option value="alpha">🔤 A-Z</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex flex-wrap gap-1.5 py-1">
+        <button onclick="setCategory('all')" class="cat-tab glossy-button active px-3.5 py-2 rounded-lg text-xs font-bold whitespace-nowrap border border-cyan-400 bg-cyan-500/20 text-cyan-300 shadow-[0_0_10px_rgba(0,240,255,0.2)]" data-cat="all">
+          <i class="fa-solid fa-globe mr-1.5"></i> Alle
+        </button>
+        <button onclick="setCategory('plugin.video')" class="cat-tab glossy-button px-3.5 py-2 rounded-lg text-xs font-bold whitespace-nowrap border border-slate-800 bg-brand-card/90 text-slate-300 hover:text-white" data-cat="plugin.video">
+          <i class="fa-solid fa-play-circle mr-1.5 text-blue-400"></i> Video Addons
+        </button>
+        <button onclick="setCategory('script')" class="cat-tab glossy-button px-3.5 py-2 rounded-lg text-xs font-bold whitespace-nowrap border border-slate-800 bg-brand-card/90 text-slate-300 hover:text-white" data-cat="script">
+          <i class="fa-solid fa-code mr-1.5 text-cyan-400"></i> Scripte
+        </button>
+        <button onclick="setCategory('service')" class="cat-tab glossy-button px-3.5 py-2 rounded-lg text-xs font-bold whitespace-nowrap border border-slate-800 bg-brand-card/90 text-slate-300 hover:text-white" data-cat="service">
+          <i class="fa-solid fa-gears mr-1.5 text-purple-400"></i> Services
+        </button>
+        <button onclick="setCategory('repository')" class="cat-tab glossy-button px-3.5 py-2 rounded-lg text-xs font-bold whitespace-nowrap border border-slate-800 bg-brand-card/90 text-slate-300 hover:text-white" data-cat="repository">
+          <i class="fa-solid fa-box-archive mr-1.5 text-amber-400"></i> Repositories
+        </button>
+        <button onclick="setCategory('android')" class="cat-tab glossy-button px-3.5 py-2 rounded-lg text-xs font-bold whitespace-nowrap border border-slate-800 bg-brand-card/90 text-slate-300 hover:text-white" data-cat="android">
+          <i class="fa-brands fa-android mr-1.5 text-emerald-400"></i> Android APKs
+        </button>
+        <button onclick="setCategory('web')" class="cat-tab glossy-button px-3.5 py-2 rounded-lg text-xs font-bold whitespace-nowrap border border-slate-800 bg-brand-card/90 text-slate-300 hover:text-white" data-cat="web">
+          <i class="fa-solid fa-globe mr-1.5 text-cyan-400"></i> Web Links
+        </button>
+      </div>
+
+    </section>
+
+    <main class="w-full px-4 sm:px-8 mb-12 flex-1">
+      <div id="spotlight-container" class="mb-4"></div>
+      <div id="toplist-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
+
+      <div id="empty-state" class="hidden text-center py-16 neon-card rounded-xl border border-cyan-500/20">
+        <i class="fa-solid fa-ghost text-5xl text-cyan-500/30 mb-3 animate-bounce"></i>
+        <h3 class="text-base font-bold text-white">Keine Einträge gefunden</h3>
+        <p class="text-slate-400 text-xs mt-1">Versuche andere Suchbegriffe oder Kategorien.</p>
+      </div>
+    </main>
+
+    <footer class="border-t border-cyan-500/20 bg-brand-dark/90 py-4 text-center text-[11px] text-slate-400 w-full">
+      <div class="w-full px-4 flex items-center justify-center space-x-2">
+        <i class="fa-solid fa-shield-halved text-cyan-400"></i>
+        <span class="font-display tracking-widest text-white">IT('s) Possible</span>
+        <span>&copy; 2026</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="modal-detail" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-3 hidden">
+    <div class="neon-card glossy-reflection max-w-lg w-full rounded-xl border border-cyan-400/50 p-5 max-h-[90vh] overflow-y-auto relative">
+      <button onclick="closeDetailModal()" class="absolute right-3 top-3 text-slate-400 hover:text-white bg-brand-black/60 p-1.5 rounded-full border border-cyan-500/30 z-20">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+      <div id="detail-content"></div>
+    </div>
+  </div>
+
+  <div id="modal-lightbox" class="fixed inset-0 bg-black/95 backdrop-blur-lg z-[60] flex items-center justify-center p-3 hidden" onclick="closeLightbox()">
+    <button onclick="closeLightbox()" class="absolute right-4 top-4 text-slate-300 hover:text-white bg-brand-black/80 p-2.5 rounded-full border border-cyan-500/50 z-70">
+      <i class="fa-solid fa-xmark text-lg"></i>
+    </button>
+    <img id="lightbox-img" src="" alt="Vollbild" class="max-w-full max-h-[90vh] object-contain rounded-lg border border-cyan-400/50 shadow-[0_0_30px_rgba(0,240,255,0.3)]" onclick="event.stopPropagation()" />
+  </div>
+
+  <div id="modal-download" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-3 hidden">
+    <div class="neon-card glossy-reflection max-w-sm w-full rounded-xl border border-cyan-400/60 p-5 text-center">
+      <div class="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-400 text-cyan-300 flex items-center justify-center mx-auto mb-3 text-xl shadow-[0_0_15px_rgba(0,240,255,0.4)]">
+        <i class="fa-solid fa-cloud-arrow-down animate-bounce"></i>
+      </div>
+      <h3 class="text-sm font-bold text-white mb-1" id="dl-title">Download wird vorbereitet</h3>
+      <p class="text-[11px] text-slate-400 mb-3" id="dl-file-info">Mirror Direct Link</p>
+      
+      <div class="bg-brand-black p-3 rounded-lg border border-cyan-500/30 mb-4">
+        <span class="text-[10px] text-slate-400 uppercase tracking-widest block mb-0.5">Ready in:</span>
+        <div id="dl-countdown" class="text-2xl font-display font-black text-cyan-400">3</div>
+      </div>
+
+      <div class="space-y-2">
+        <a id="dl-direct-btn" href="#" target="_blank" class="glossy-button block w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold py-2.5 rounded-lg border border-emerald-300/40 text-xs hidden">
+          <i class="fa-solid fa-download mr-1.5"></i> Jetzt Herunterladen
+        </a>
+        <button onclick="closeDlModal()" class="w-full py-1.5 bg-slate-800 text-slate-300 text-xs rounded-lg hover:bg-slate-700">Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2 pointer-events-none"></div>
+
+  <script>
+    function cleanKodiTags(text) {
+      if (!text) return '';
+      return text.replace(/\[\/?COLOR[^\]]*\]/gi, '').trim();
+    }
+
+    const MANUAL_PROJECTS = [
+      {
+        id: 'proj-buildbauer' + Date.now(),
+        title: 'Buildbauer',
+        developer: 'mr-evil1',
+        version: '2026.11.11',
+        date: '2026-11-12',
+        image: 'https://raw.githubusercontent.com/Chrisophy/KSG/refs/heads/main/buildbauer.png',
+        generatedImage: '',
+        fanartJpg: '',
+        fanartPng: '',
+        desc: 'Diese Anleitung führt durch Installation, Build-Erstellung, Veröffentlichung, Build-Listen, die zentrale Datei itspossible.json, Wartung, FTP und Fehlerbehebung. Alle Beispiele sind Kopiervorlagen. Der Wizard bleibt nach einer Build-Installation erhalten.',
+        downloads: 0,
+        kodiUrl: '',
+        apkUrl: '',
+        htmlUrl: 'https://chrisophy.github.io/KSG/buildbauer.html',
+        tags: ['Kodi', 'Build', 'Wizard', 'Anleitung', 'Addon']
+      },    
+      {
+        id: 'proj-kmr' + Date.now(),
+        title: 'Kodi Media Repository',
+        developer: 'mr-evil1',
+        version: '2026',
+        date: '2026-11-12',
+        image: 'https://raw.githubusercontent.com/mr-evil1/kodi-media-repo/refs/heads/main/repository.kodi.media/kodi-media.jpg',
+        generatedImage: '',
+        fanartJpg: '',
+        fanartPng: '',
+        desc: 'Beste Repository. Hier findet du die besten Kodi Addons',
+        downloads: 0,
+        kodiUrl: '',
+        apkUrl: '',
+        htmlUrl: 'https://mr-evil1.github.io/kodi-media-repo/',
+        tags: ['Kodi', 'Repo', 'Repository']
+      },    
+      {
+        id: 'plugin.video.gezkino',
+        title: '[GEZ] KiNO',
+        developer: 'zusatzmetall, Kato14, mr-evil1, Kangool',
+        version: '2026.10.19',
+        date: '2026-10-19',
+        image: 'https://raw.githubusercontent.com/mr-evil1/kodi-media-repo/refs/heads/main/plugin.video.gezkino/media/icon.png',
+        iconJpg: 'https://raw.githubusercontent.com/mr-evil1/kodi-media-repo/refs/heads/main/plugin.video.gezkino/icon.png',
+        resourcesPng: 'https://raw.githubusercontent.com/Chrisophy/GEZ-KiNO/refs/heads/main/resources/icon.png',
+        desc: 'Entdecke eine kuratierte Auswahl an Spielfilmen, sortiert nach Genres, Jahren oder Bewertungen und bietet eine übersichtliche, benutzerfreundliche Oberfläche.',
+        downloads: 0,
+        kodiUrl: 'https://raw.githubusercontent.com/mr-evil1/kodi-media-repo/refs/heads/main/plugin.video.gezkino/plugin.video.gezkino-2026.10.19.zip',
+        apkUrl: 'https://github.com/Chrisophy/GEZ-KiNO/releases/download/GEZv/GEZ.KiNO.apk',
+        htmlUrl: 'https://chrisophy.github.io/GEZ-KiNO/',
+        tags: ['Kodi', 'video']
+      },
+      {
+        id: 'proj-stimmung',
+        title: 'Stimmungs-Tagebuch',
+        developer: 'zusatzmetall',
+        version: 'v1.0.6',
+        date: '2026-11-12',
+        image: 'https://raw.githubusercontent.com/Chrisophy/Stimmung/refs/heads/main/icons/icon-512x512.png',
+        desc: 'Die Hauptfunktion der App ist die einfache und schnelle Erfassung und Nachverfolgung Ihres emotionalen und körperlichen Zustands über den Tag und über die Zeit.',
+        downloads: 0,
+        kodiUrl: '',
+        apkUrl: 'https://github.com/Chrisophy/Stimmung/releases/download/002/Tagebuch.apk',
+        htmlUrl: 'https://chrisophy.github.io/Stimmung',
+        tags: ['Stimmung', 'App', 'Tagebuch']
+      },
+      {
+        id: 'proj-ksg',
+        title: 'Kodi Skin & Addon Generator',
+        developer: 'zusatzmetall',
+        version: 'v9.1 Pro',
+        date: '2026-11-12',
+        image: 'https://raw.githubusercontent.com/Chrisophy/KSG/refs/heads/main/KSG.png',
+        desc: 'Baue dein eigenes Kodi-Video-Addon mit individuellem Vollbild-Menü, einen kompletten Kodi-Skin oder ein Menü um ein vorhandenes Addon – ohne eine Zeile Code zu schreiben.',
+        downloads: 0,
+        kodiUrl: '',
+        apkUrl: '',
+        htmlUrl: 'https://chrisophy.github.io/KSG/',
+        tags: ['Kodi', 'Skin', 'Addon', 'Design']
+      },
+      {
+        id: 'proj-wetter',
+        title: 'Wetter',
+        developer: 'zusatzmetall',
+        version: 'v1.0',
+        date: '2026-11-12',
+        image: 'https://raw.githubusercontent.com/Chrisophy/Wetter/refs/heads/main/7133364.png',
+        desc: 'Wetterbericht minimal',
+        downloads: 0,
+        kodiUrl: '',
+        apkUrl: 'https://github.com/Chrisophy/Wetter/raw/refs/heads/main/Wetter.apk',
+        htmlUrl: 'https://chrisophy.github.io/Wetter/',
+        tags: ['Wetter', 'App']
+      },
+      {
+        id: 'proj-stb',
+        title: 'ShutTheBox',
+        developer: 'zusatzmetall',
+        version: 'v6.0.0',
+        date: '2026-11-12',
+        image: 'https://raw.githubusercontent.com/Chrisophy/ShutTheBox/refs/heads/main/shut.jpg',
+        desc: 'Würfelspiel, Klappbrett bzw. Shut The Box.',
+        downloads: 0,
+        kodiUrl: 'https://github.com/Chrisophy/ShutTheBox/raw/refs/heads/main/game.shut.zip',
+        apkUrl: 'https://github.com/Chrisophy/ShutTheBox/raw/refs/heads/main/ShutTheBox.apk',
+        htmlUrl: 'https://chrisophy.github.io/ShutTheBox/',
+        tags: ['Spiel', 'Klappbrett', 'ShutTheBox']
+      },
+      {
+        id: 'proj-moviescoutapk',
+        title: 'MovieScout APK',
+        developer: 'zusatzmetall',
+        version: 'v2.42.6',
+        date: '2026-11-12',
+        image: 'https://raw.githubusercontent.com/Chrisophy/updates/refs/heads/main/MovieScout.jpg',
+        desc: 'Dein neues Streaming und Android Erlebnis. Kodi-Scraper ohne Kodi: eine Oberfläche für Browser und Android, dazu eine kleine Python-Engine.',
+        downloads: 0,
+        kodiUrl: '',
+        apkUrl: 'https://www.dropbox.com/scl/fi/flqxx37n848j51yonooso/MovieScout.apk?rlkey=0zcjslenfmhzvr7oq4imdkqaq&st=ifwk4c93&dl=1',
+        htmlUrl: '',
+        tags: ['Kodi', 'Launcher', 'App', 'Filme', 'Serien', 'Live-TV'],
+        extraLinks: [
+          { label: 'Legale Scraper', url: 'https://github.com/Chrisophy/scraper', icon: 'fa-code' },
+          { label: 'Gadgets', url: 'https://github.com/Chrisophy/gadgets', icon: 'fa-microchip' },
+          { label: 'Spiele', url: 'https://github.com/Chrisophy/spiele', icon: 'fa-gamepad' },
+          { label: 'Gadgets & Spiele', url: 'https://github.com/Chrisophy/gadgets1', icon: 'fa-puzzle-piece' },
+          { label: 'Scraper (Alle)', url: 'https://github.com/Chrisophy/scraper1', icon: 'fa-database' }
+        ]
+      }
+    ];
+
+    const KODI_ADDON_IDS = [
+      'script.module.certifi',
+      'script.module.inputstreamhelper',
+      'script.module.six',
+      'service.htmlremote',
+      'repository.kodi.media',
+      'plugin.video.kodi.newpipe',
+      'plugin.video.stbplus',
+      'script.module.httpx',
+      'plugin.video.vav',
+      'plugin.video.gitplayger',
+      'plugin.video.deezer',
+      'script.module.urllib3',
+      'plugin.video.vodkool',
+      'plugin.video.iptvmaster',
+      'plugin.video.bilddenews',
+      'script.module.cloudrequest',
+      'plugin.video.plexfree',
+      'plugin.video.multistream',
+      'plugin.video.rtlplus',
+      'script.module.cloudscraper',
+      'plugin.video.expressnews',
+      'plugin.video.werwirdmillionaer',
+      'plugin.video.kidstube',
+      'script.unlock.moviescout',
+      'script.module.idna',
+      'plugin.video.plutotv',
+      'script.module.py7zr',
+      'script.module.requests',
+      'script.module.resolveurl',
+      'plugin.video.multitrailer',
+      'plugin.program.ftp',
+      'plugin.video.gezkino',
+      'script.module.kodi-six',
+      'plugin.video.tube8porn',
+      'script.module.pyqrcode',
+      'plugin.video.moviescout',
+      'plugin.video.atvdownloader',
+      'script.module.chardet',
+      'script.module.unlock',
+      'plugin.video.megakino',
+      'plugin.video.telegramscraper',
+      'script.ydkj.quiz',
+      'plugin.video.netzkino',
+      'plugin.video.alpenrammler'
+    ];
+
+    let projects = [];
+    let currentCategory = 'all';
+    let searchTerm = '';
+    let currentSort = 'stars';
+
+    const REPO_BASE_URL = 'https://raw.githubusercontent.com/mr-evil1/kodi-media-repo/main/';
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      await loadRepoAddons();
+      renderToplist();
+      updateStats();
+    });
+
+    async function loadRepoAddons() {
+      const storedStars = JSON.parse(localStorage.getItem('IT_POSSIBLE_USER_STARS') || '{}');
+      const storedDownloads = JSON.parse(localStorage.getItem('IT_POSSIBLE_USER_DOWNLOADS') || '{}');
+      let combined = [...MANUAL_PROJECTS];
+
+      document.getElementById('repo-status').innerText = 'Check...';
+
+      for (let id of KODI_ADDON_IDS) {
+        if (combined.some(p => p.id === id)) continue;
+
+        try {
+          const xmlUrl = `${REPO_BASE_URL}${id}/addon.xml`;
+          const res = await fetch(xmlUrl);
+          if (!res.ok) continue;
+          const xmlText = await res.text();
+
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+          const addonNode = xmlDoc.getElementsByTagName('addon')[0];
+          if (!addonNode) continue;
+
+          const version = addonNode.getAttribute('version') || '1.0.0';
+          let name = cleanKodiTags(addonNode.getAttribute('name') || id);
+          
+          let developer = 'mr-evil1';
+          if (addonNode.hasAttribute('provider-name')) {
+            developer = cleanKodiTags(addonNode.getAttribute('provider-name'));
+          } else if (addonNode.hasAttribute('provider_name')) {
+            developer = cleanKodiTags(addonNode.getAttribute('provider_name'));
+          } else {
+            const providerNode = xmlDoc.getElementsByTagName('provider_name')[0] || xmlDoc.getElementsByTagName('author')[0];
+            if (providerNode && providerNode.textContent) {
+              developer = cleanKodiTags(providerNode.textContent);
+            }
+          }
+
+          let desc = '';
+          const summaryNode = addonNode.getElementsByTagName('summary')[0];
+          const descNode = addonNode.getElementsByTagName('description')[0];
+          if (descNode && descNode.textContent) {
+            desc = cleanKodiTags(descNode.textContent);
+          } else if (summaryNode && summaryNode.textContent) {
+            desc = cleanKodiTags(summaryNode.textContent);
+          }
+
+          let primaryIcon = `${REPO_BASE_URL}${id}/icon.png`;
+          if (id === 'repository.kodi.media') {
+            primaryIcon = `${REPO_BASE_URL}${id}/kodi-media.jpg`;
+          } else if (id === 'plugin.video.megakino') {
+            primaryIcon = `${REPO_BASE_URL}${id}/resources/media/icon.png`;
+          } else if (id === 'plugin.video.gezkino') {
+            primaryIcon = `${REPO_BASE_URL}${id}/media/icon.png`;
+          }
+
+          const zipUrl = `${REPO_BASE_URL}${id}/${id}-${version}.zip`;
+
+          combined.push({
+            id: id,
+            title: name,
+            developer: developer,
+            version: version,
+            date: version,
+            image: primaryIcon,
+            iconJpg: `${REPO_BASE_URL}${id}/icon.jpg`,
+            resourcesPng: `${REPO_BASE_URL}${id}/resources/icon.png`,
+            resourcesJpg: `${REPO_BASE_URL}${id}/resources/icon.jpg`,
+            mediaPng: `${REPO_BASE_URL}${id}/resources/media/icon.png`,
+            mediaJpg: `${REPO_BASE_URL}${id}/resources/media/icon.jpg`,
+            fanartJpg: `${REPO_BASE_URL}${id}/fanart.jpg`,
+            fanartPng: `${REPO_BASE_URL}${id}/fanart.png`,
+            generatedImage: `${REPO_BASE_URL}_generated_assets/${id}.png`,
+            desc: desc || 'Keine Beschreibung hinterlegt.',
+            downloads: 0,
+            kodiUrl: zipUrl,
+            apkUrl: '',
+            htmlUrl: '',
+            tags: ['Kodi', id.split('.')[1] || 'Addon']
+          });
+        } catch (e) {
+          console.warn(`Konnte addon.xml für ${id} nicht laden`, e);
+        }
+      }
+
+      document.getElementById('repo-status').innerText = 'ONLINE';
+
+      projects = combined.map((item, index) => ({
+        ...item,
+        originalIndex: index,
+        userStars: storedStars[item.id] !== undefined ? storedStars[item.id] : 0,
+        downloads: storedDownloads[item.id] !== undefined ? storedDownloads[item.id] : 0
+      }));
+    }
+
+    function changeStars(id, delta) {
+      const item = projects.find(p => p.id === id);
+      if (!item) return;
+
+      item.userStars = Math.max(0, (item.userStars || 0) + delta);
+
+      let storedStars = JSON.parse(localStorage.getItem('IT_POSSIBLE_USER_STARS') || '{}');
+      if (item.userStars > 0) {
+        storedStars[id] = item.userStars;
+      } else {
+        delete storedStars[id];
+      }
+      localStorage.setItem('IT_POSSIBLE_USER_STARS', JSON.stringify(storedStars));
+
+      renderToplist();
+      showToast(`Sterne für "${item.title}": ${item.userStars} ⭐`);
+    }
+
+    function updateStats() {
+      document.getElementById('stat-count').innerText = projects.length;
+      const totalDl = projects.reduce((acc, item) => acc + (item.downloads || 0), 0);
+      document.getElementById('stat-downloads').innerText = totalDl.toLocaleString('de-DE');
+    }
+
+    function handleSearch() {
+      searchTerm = document.getElementById('search-input').value.trim().toLowerCase();
+      document.getElementById('clear-search').classList.toggle('hidden', searchTerm === '');
+      renderToplist();
+    }
+
+    function clearSearch() {
+      document.getElementById('search-input').value = '';
+      searchTerm = '';
+      document.getElementById('clear-search').classList.add('hidden');
+      renderToplist();
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-tab').forEach(tab => {
+        if (tab.dataset.cat === cat) {
+          tab.className = 'cat-tab glossy-button active px-3.5 py-2 rounded-lg text-xs font-bold whitespace-nowrap border border-cyan-400 bg-cyan-500/20 text-cyan-300 shadow-[0_0_10px_rgba(0,240,255,0.2)]';
+        } else {
+          tab.className = 'cat-tab glossy-button px-3.5 py-2 rounded-lg text-xs font-bold whitespace-nowrap border border-slate-800 bg-brand-card/90 text-slate-300 hover:text-white';
+        }
+      });
+      renderToplist();
+    }
+
+    function resetFilters() {
+      currentCategory = 'all';
+      searchTerm = '';
+      document.getElementById('search-input').value = '';
+      document.getElementById('clear-search').classList.add('hidden');
+      setCategory('all');
+    }
+
+    function matchesCategory(item, cat) {
+      if (cat === 'all') return true;
+      const id = item.id.toLowerCase();
+      if (cat === 'plugin.video' && id.startsWith('plugin.video')) return true;
+      if (cat === 'script' && id.startsWith('script.')) return true;
+      if (cat === 'service' && (id.startsWith('service.') || id.startsWith('plugin.program'))) return true;
+      if (cat === 'repository' && id.startsWith('repository.')) return true;
+      if (cat === 'android' && item.apkUrl && item.apkUrl.trim() !== '') return true;
+      if (cat === 'web' && (item.htmlUrl && item.htmlUrl.trim() !== '' || (item.extraLinks && item.extraLinks.length > 0))) return true;
+      return false;
+    }
+
+    function renderToplist() {
+      const grid = document.getElementById('toplist-grid');
+      const spotlight = document.getElementById('spotlight-container');
+      const emptyState = document.getElementById('empty-state');
+      currentSort = document.getElementById('sort-select').value;
+
+      let filtered = projects.filter(item => {
+        if (!matchesCategory(item, currentCategory)) return false;
+
+        if (searchTerm) {
+          const matchTitle = item.title.toLowerCase().includes(searchTerm);
+          const matchDesc = item.desc.toLowerCase().includes(searchTerm);
+          const matchDev = item.developer && item.developer.toLowerCase().includes(searchTerm);
+          const matchTag = item.tags && item.tags.some(t => t.toLowerCase().includes(searchTerm));
+          if (!matchTitle && !matchDesc && !matchDev && !matchTag) return false;
+        }
+        return true;
+      });
+
+      filtered.sort((a, b) => {
+        if (currentSort === 'stars') {
+          if (b.userStars !== a.userStars) return b.userStars - a.userStars;
+          return a.originalIndex - b.originalIndex;
+        }
+        if (currentSort === 'default') return a.originalIndex - b.originalIndex;
+        
+        if (currentSort === 'newest') {
+          const parseVersionDate = (dateStr) => {
+            if (!dateStr) return 0;
+            const matches = dateStr.match(/(\d{4})[.\-](\d{2})[.\-](\d{2})(?:[.\-](\d+))?/);
+            if (matches) {
+              const year = matches[1];
+              const month = matches[2];
+              const day = matches[3];
+              const sub = matches[4] ? matches[4].padStart(2, '0') : '00';
+              return parseInt(`${year}${month}${day}${sub}`, 10);
+            }
+            const d = new Date(dateStr.replace(/\./g, '-'));
+            return isNaN(d) ? 0 : d.getTime();
+          };
+
+          return parseVersionDate(b.date) - parseVersionDate(a.date);
+        }
+
+        if (currentSort === 'downloads') return b.downloads - a.downloads;
+        if (currentSort === 'alpha') return a.title.localeCompare(b.title);
+        return 0;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        spotlight.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+
+      let gridItems = filtered;
+
+      if (filtered.length > 0 && (currentSort === 'stars' || currentSort === 'default') && !searchTerm) {
+        const topItem = filtered[0];
+
+        spotlight.innerHTML = `
+          <div class="neon-card glossy-reflection rounded-xl p-4 border border-cyan-400 bg-gradient-to-r from-brand-card via-brand-gloss to-brand-card relative overflow-hidden shadow-[0_0_20px_rgba(0,240,255,0.2)]">
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+              <div class="w-full sm:w-1/3 h-32 rounded-lg overflow-hidden border border-cyan-500/40 relative flex items-center justify-center bg-brand-black cursor-pointer group" onclick="openLightbox('${topItem.image}', '${topItem.title}')">
+                <div class="absolute top-2.5 left-2.5 z-20">
+                  <span class="px-2 py-0.5 rounded text-[11px] font-display tracking-wider border shadow bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-black border-yellow-300 shadow-[0_0_8px_rgba(234,179,8,0.4)]">👑 #1 TOP</span>
+                </div>
+                ${generateThumbnailHTML(topItem)}
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-cyan-300 text-xs font-bold gap-1">
+                  <i class="fa-solid fa-expand"></i> Vergrößern
+                </div>
+              </div>
+              <div class="w-full sm:w-2/3 flex flex-col justify-between space-y-2">
+                <div>
+                  <div class="flex items-center gap-2 mb-0.5">
+                    <span class="text-[11px] text-cyan-300 font-semibold"><i class="fa-solid fa-code-merge mr-1"></i>Dev: ${topItem.developer || 'IT(\'s) Possible'}</span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-bold text-white">${topItem.title}</h3>
+                  <p class="text-slate-300 text-xs mt-1 line-clamp-2">${topItem.desc}</p>
+                </div>
+
+                <div class="flex items-center gap-2 py-0.5">
+                  <span class="text-[11px] text-slate-400">Sterne:</span>
+                  <div class="flex items-center bg-brand-black/80 border border-cyan-500/30 rounded-lg px-2 py-0.5 gap-2">
+                    <button onclick="changeStars('${topItem.id}', -1)" class="w-5 h-5 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 flex items-center justify-center text-xs font-bold">-</button>
+                    <span class="text-amber-400 font-bold text-xs"><i class="fa-solid fa-star mr-1"></i>${topItem.userStars}</span>
+                    <button onclick="changeStars('${topItem.id}', 1)" class="w-5 h-5 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 flex items-center justify-center text-xs font-bold">+</button>
+                  </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-cyan-500/20">
+                  <div class="text-[11px] text-slate-400">
+                    <span><i class="fa-solid fa-download text-emerald-400 mr-1"></i><strong class="text-white">${topItem.downloads}</strong> DLs</span>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    ${topItem.kodiUrl ? `<button onclick="triggerDownload('${topItem.id}', '${topItem.kodiUrl}', 'Kodi ZIP')" class="glossy-button px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold rounded-lg flex items-center gap-1"><i class="fa-solid fa-cube"></i> Kodi</button>` : ''}
+                    ${topItem.apkUrl ? `<button onclick="triggerDownload('${topItem.id}', '${topItem.apkUrl}', 'Android APK')" class="glossy-button px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold rounded-lg flex items-center gap-1"><i class="fa-brands fa-android"></i> APK</button>` : ''}
+                    ${topItem.htmlUrl ? `<a href="${topItem.htmlUrl}" target="_blank" onclick="trackClick('${topItem.id}')" class="glossy-button px-2.5 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold rounded-lg flex items-center gap-1"><i class="fa-solid fa-globe"></i> Web</a>` : ''}
+                    <button onclick="openDetailModal('${topItem.id}')" class="px-2 py-1.5 bg-slate-800 text-slate-300 text-[11px] font-bold rounded-lg">Details</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        gridItems = filtered.slice(1);
+      } else {
+        spotlight.innerHTML = '';
+      }
+
+      grid.innerHTML = gridItems.map((item, index) => {
+        const rankNum = (currentSort === 'stars' || currentSort === 'default') && !searchTerm ? index + 2 : index + 1;
+        const rankBadgeClass = 'bg-slate-800 text-slate-300 border-slate-600';
+        const rankLabel = `#${rankNum}`;
+
+        return `
+          <div class="neon-card glossy-reflection rounded-xl flex flex-col justify-between overflow-hidden relative group">
+            <div class="w-full h-32 bg-brand-black relative overflow-hidden flex items-center justify-center cursor-pointer border-b border-cyan-500/20 group" onclick="openLightbox('${item.image}', '${item.title}')">
+              <div class="absolute top-2.5 left-2.5 z-20">
+                <span class="px-2 py-0.5 rounded text-[11px] font-display tracking-wider border shadow ${rankBadgeClass}">${rankLabel}</span>
+              </div>
+              ${generateThumbnailHTML(item)}
+              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-cyan-300 text-xs font-bold gap-1.5 z-10">
+                <i class="fa-solid fa-expand"></i> Vergrößern
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent opacity-90 pointer-events-none"></div>
+              <div class="absolute bottom-1.5 left-2.5 flex gap-1 z-10">
+                ${item.kodiUrl ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-blue-950/90 text-blue-300 border border-blue-500/30">Kodi</span>' : ''}
+                ${item.apkUrl ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-950/90 text-emerald-300 border border-emerald-500/30">APK</span>' : ''}
+                ${item.htmlUrl || (item.extraLinks && item.extraLinks.length > 0) ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-500/30">Web</span>' : ''}
+              </div>
+            </div>
+
+            <div class="p-3.5 flex-1 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-[11px] text-cyan-400 font-medium mb-1">
+                  <span class="truncate pr-2"><i class="fa-solid fa-code-merge mr-1 text-[10px]"></i>${item.developer || 'IT(\'s) Possible'}</span>
+                  <span class="whitespace-nowrap text-slate-400">${item.version || ''}</span>
+                </div>
+                <h4 class="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors cursor-pointer line-clamp-1" onclick="openDetailModal('${item.id}')">
+                  ${item.title}
+                </h4>
+                <p class="text-[11px] text-slate-300 mt-1 line-clamp-2 leading-relaxed">${item.desc}</p>
+                
+                <div class="flex items-center justify-between mt-2.5 py-1 bg-brand-black/50 px-2.5 rounded-lg border border-cyan-500/20">
+                  <span class="text-[10px] text-slate-400">Sterne:</span>
+                  <div class="flex items-center gap-1.5">
+                    <button onclick="changeStars('${item.id}', -1)" class="w-5 h-5 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 flex items-center justify-center text-xs font-bold">-</button>
+                    <span class="text-amber-400 font-bold text-xs"><i class="fa-solid fa-star mr-1"></i>${item.userStars}</span>
+                    <button onclick="changeStars('${item.id}', 1)" class="w-5 h-5 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 flex items-center justify-center text-xs font-bold">+</button>
+                  </div>
+                </div>
+
+                ${item.tags && item.tags.length > 0 ? `
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    ${item.tags.map(t => `<span class="text-[9px] px-1.5 py-0.5 rounded bg-blue-950/60 text-slate-300 border border-blue-800/40">#${t}</span>`).join('')}
+                  </div>
+                ` : ''}
+              </div>
+
+              <div class="pt-3 mt-3 border-t border-cyan-500/15 flex items-center justify-between gap-1">
+                <span class="text-[10px] text-slate-400"><i class="fa-solid fa-download text-emerald-400 mr-1"></i>${item.downloads}</span>
+                <div class="flex items-center space-x-1">
+                  ${item.kodiUrl ? `<button onclick="triggerDownload('${item.id}', '${item.kodiUrl}', 'Kodi ZIP')" title="Kodi Addon" class="glossy-button p-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs"><i class="fa-solid fa-cube"></i></button>` : ''}
+                  ${item.apkUrl ? `<button onclick="triggerDownload('${item.id}', '${item.apkUrl}', 'Android APK')" title="Android APK" class="glossy-button p-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs"><i class="fa-brands fa-android"></i></button>` : ''}
+                  ${item.htmlUrl ? `<a href="${item.htmlUrl}" target="_blank" onclick="trackClick('${item.id}')" title="Web Version" class="glossy-button p-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-xs"><i class="fa-solid fa-globe"></i></a>` : ''}
+                  <button onclick="openDetailModal('${item.id}')" title="Details" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs"><i class="fa-solid fa-eye"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function generateThumbnailHTML(item) {
+      let sources = [];
+      
+      if (item.id === 'plugin.video.gezkino') {
+        sources = [
+          'https://raw.githubusercontent.com/mr-evil1/kodi-media-repo/refs/heads/main/plugin.video.gezkino/media/icon.png',
+          'https://raw.githubusercontent.com/mr-evil1/kodi-media-repo/refs/heads/main/plugin.video.gezkino/icon.png',
+          'https://raw.githubusercontent.com/Chrisophy/GEZ-KiNO/refs/heads/main/resources/media/icon.png',
+          'https://raw.githubusercontent.com/Chrisophy/GEZ-KiNO/refs/heads/main/icon.png'
+        ];
+      } else {
+        sources = [
+          item.image,
+          item.mediaPng,
+          item.resourcesPng,
+          item.iconJpg,
+          item.mediaJpg,
+          item.resourcesJpg,
+          item.fanartJpg,
+          item.fanartPng,
+          item.generatedImage
+        ];
+      }
+
+      sources = sources.filter(Boolean);
+
+      if (sources.length === 0) {
+        return getFallbackPlaceholder(item);
+      }
+
+      const chainId = 'img_' + Math.random().toString(36).substring(2, 9);
+      window[chainId] = sources;
+      window[chainId + '_idx'] = 0;
+
+      return `<img src="${sources[0]}" alt="${item.title}" class="w-full h-full object-contain p-1" onerror="
+        window['${chainId}_idx']++;
+        if(window['${chainId}_idx'] < window['${chainId}'].length) {
+          this.src = window['${chainId}'][window['${chainId}_idx']];
+        } else {
+          this.onerror = null;
+          this.src = 'https://placehold.co/600x400/0b1329/00f0ff?text=KODI+ADDON';
+        }
+      " />`;
+    }
+
+    function getFallbackPlaceholder(item) {
+      return `
+        <div class="w-full h-full bg-gradient-to-br from-blue-900 to-indigo-950 flex flex-col items-center justify-center p-3">
+          <div class="w-12 h-12 rounded-xl bg-brand-black/60 border border-cyan-500/40 flex items-center justify-center mb-1">
+            <i class="fa-solid fa-cubes text-2xl text-cyan-400"></i>
+          </div>
+          <span class="font-display text-[10px] font-bold tracking-widest text-slate-300 opacity-80 uppercase">${item.title}</span>
+        </div>
+      `;
+    }
+
+    function openLightbox(imgUrl, title) {
+      if (!imgUrl || imgUrl.trim() === '') return;
+      document.getElementById('lightbox-img').src = imgUrl;
+      document.getElementById('modal-lightbox').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('modal-lightbox').classList.add('hidden');
+    }
+
+    function incrementDownload(id) {
+      const item = projects.find(p => p.id === id);
+      if (!item) return;
+
+      item.downloads = (item.downloads || 0) + 1;
+
+      let storedDownloads = JSON.parse(localStorage.getItem('IT_POSSIBLE_USER_DOWNLOADS') || '{}');
+      storedDownloads[id] = item.downloads;
+      localStorage.setItem('IT_POSSIBLE_USER_DOWNLOADS', JSON.stringify(storedDownloads));
+
+      renderToplist();
+      updateStats();
+    }
+
+    function trackClick(id) {
+      incrementDownload(id);
+    }
+
+    let dlInterval = null;
+    function triggerDownload(id, url, label) {
+      const item = projects.find(p => p.id === id);
+      if (!item || !url) return;
+      
+      incrementDownload(id);
+
+      document.getElementById('dl-title').innerText = `${item.title} (${label})`;
+      const directBtn = document.getElementById('dl-direct-btn');
+      directBtn.classList.add('hidden');
+      directBtn.href = url;
+
+      let count = 3;
+      document.getElementById('dl-countdown').innerText = count;
+      document.getElementById('modal-download').classList.remove('hidden');
+
+      if (dlInterval) clearInterval(dlInterval);
+      dlInterval = setInterval(() => {
+        count--;
+        if (count > 0) {
+          document.getElementById('dl-countdown').innerText = count;
+        } else {
+          clearInterval(dlInterval);
+          document.getElementById('dl-countdown').innerText = "BEREIT!";
+          directBtn.classList.remove('hidden');
+        }
+      }, 1000);
+    }
+
+    function closeDlModal() {
+      if (dlInterval) clearInterval(dlInterval);
+      document.getElementById('modal-download').classList.add('hidden');
+    }
+
+    function openDetailModal(id) {
+      const item = projects.find(p => p.id === id);
+      if (!item) return;
+
+      let extraLinksHTML = '';
+      if (item.extraLinks && item.extraLinks.length > 0) {
+        extraLinksHTML = `
+          <div class="pt-3 border-t border-cyan-500/20">
+            <span class="text-[10px] text-cyan-300 uppercase tracking-wider block mb-2 font-bold"><i class="fa-solid fa-link mr-1"></i> Zusätzliche Gadgets & Scraper Repos:</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              ${item.extraLinks.map(link => `
+                <a href="${link.url}" target="_blank" onclick="trackClick('${item.id}')" class="glossy-button flex items-center space-x-2 p-2 rounded-lg bg-brand-black border border-cyan-500/30 text-xs text-slate-200 hover:text-cyan-300 hover:border-cyan-400">
+                  <i class="fa-solid ${link.icon || 'fa-external-link-alt'} text-cyan-400"></i>
+                  <span class="truncate">${link.label}</span>
+                </a>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      document.getElementById('detail-content').innerHTML = `
+        <div class="space-y-3">
+          <div class="w-full h-44 rounded-lg overflow-hidden border border-cyan-500/30 relative flex items-center justify-center bg-brand-black cursor-pointer group" onclick="openLightbox('${item.image}', '${item.title}')">
+            ${generateThumbnailHTML(item)}
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-cyan-300 text-xs font-bold gap-1.5 z-10">
+              <i class="fa-solid fa-expand"></i> Im Vollbild anzeigen
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-cyan-500/20 pb-2.5">
+            <div>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">Entwickler: ${item.developer || 'IT(\'s) Possible'}</span>
+            <h2 class="text-base sm:text-lg font-bold text-white mt-1">${item.title}</h2>
+            </div>
+            <div class="text-right text-[11px] text-slate-400">
+              <div>Version: <strong class="text-white">${item.version || 'v1.0'}</strong></div>
+              <div>Datum: <strong class="text-white">${item.date || '2026'}</strong></div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-200 leading-relaxed bg-brand-black/60 p-3 rounded-xl border border-cyan-500/20">${item.desc}</p>
+          
+          ${extraLinksHTML}
+
+          ${item.tags && item.tags.length > 0 ? `<div class="flex flex-wrap gap-1">${item.tags.map(t => `<span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">#${t}</span>`).join('')}</div>` : ''}
+          
+          <div class="pt-2">
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider block mb-2">Verfügbare Mirrors & Plattformen:</span>
+            <div class="flex flex-wrap gap-2">
+              ${item.kodiUrl ? `<button onclick="triggerDownload('${item.id}', '${item.kodiUrl}', 'Kodi ZIP')" class="glossy-button px-3 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg flex items-center gap-1.5"><i class="fa-solid fa-cube"></i> Kodi Addon</button>` : ''}
+              ${item.apkUrl ? `<button onclick="triggerDownload('${item.id}', '${item.apkUrl}', 'Android APK')" class="glossy-button px-3 py-2 bg-emerald-600 text-white text-xs font-bold rounded-lg flex items-center gap-1.5"><i class="fa-brands fa-android"></i> Android APK</button>` : ''}
+              ${item.htmlUrl ? `<a href="${item.htmlUrl}" target="_blank" onclick="trackClick('${item.id}')" class="glossy-button px-3 py-2 bg-cyan-600 text-white text-xs font-bold rounded-lg flex items-center gap-1.5"><i class="fa-solid fa-globe"></i> HTML Web-Link</a>` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById('modal-detail').classList.remove('hidden');
+    }
+
+    function closeDetailModal() {
+      document.getElementById('modal-detail').classList.add('hidden');
+    }
+
+    function showToast(msg) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto glossy-reflection px-3 py-2 rounded-lg border border-cyan-400 bg-brand-card text-white text-xs font-bold shadow-[0_0_15px_rgba(0,240,255,0.4)] flex items-center space-x-2`;
+      toast.innerHTML = `<i class="fa-solid fa-circle-check text-cyan-400 text-sm"></i><span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
+    }
+  </script>
+</body>
+</html>
